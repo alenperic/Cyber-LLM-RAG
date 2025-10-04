@@ -1,0 +1,52 @@
+MIT License
+
+Copyright (c) 2025 CyberLLM RAG Project
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+## Third-Party Data Licenses
+
+This project uses cybersecurity data from various sources:
+
+### MITRE ATT&CK
+- License: Apache License 2.0
+- Source: https://attack.mitre.org/
+- Copyright: The MITRE Corporation
+
+### CWE (Common Weakness Enumeration)
+- License: Public Domain
+- Source: https://cwe.mitre.org/
+- Copyright: The MITRE Corporation
+
+### CAPEC (Common Attack Pattern Enumeration and Classification)
+- License: Public Domain
+- Source: https://capec.mitre.org/
+- Copyright: The MITRE Corporation
+
+### NVD (National Vulnerability Database)
+- License: Public Domain
+- Source: https://nvd.nist.gov/
+- Copyright: National Institute of Standards and Technology (NIST)
+
+### Sigma Detection Rules
+- License: Detection Rule License (DRL)
+- Source: https://github.com/SigmaHQ/sigma
+- Copyright: SigmaHQ Contributors

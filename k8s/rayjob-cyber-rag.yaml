@@ -1,0 +1,115 @@
+apiVersion: ray.io/v1
+kind: RayJob
+metadata:
+  name: cyber-rag-service
+  namespace: default
+spec:
+  # The job will run this Python script
+  entrypoint: |
+    python -c "
+    import ray
+    from ray import serve
+    import time
+
+    # Keep job running
+    print('CyberRAG service starting...')
+    time.sleep(3600)  # Run for 1 hour
+    "
+
+  # Runtime environment
+  runtimeEnvYAML: |
+    pip:
+      - transformers==4.36.0
+      - chromadb==0.4.22
+      - sentence-transformers==2.3.0
+      - torch>=2.1.0
+      - fastapi
+      - aiohttp
+
+  # Shutdown after job completes
+  shutdownAfterJobFinishes: false
+  ttlSecondsAfterFinished: 300
+
+  # Ray cluster spec
+  rayClusterSpec:
+    rayVersion: "2.31.0"
+
+    # Head node
+    headGroupSpec:
+      rayStartParams:
+        dashboard-host: "0.0.0.0"
+        num-cpus: "4"
+        memory: "5368709120"  # 5GB for Ray heap
+        object-store-memory: "1073741824"  # 1GB for object store
+      template:
+        metadata:
+          labels:
+            app: cyber-rag
+            component: head
+        spec:
+          containers:
+            - name: ray-head
+              image: rayproject/ray:2.31.0-py310-gpu
+              imagePullPolicy: IfNotPresent
+              resources:
+                requests:
+                  cpu: "2"
+                  memory: "4Gi"
+                limits:
+                  cpu: "4"
+                  memory: "8Gi"
+                  nvidia.com/gpu: 1
+              ports:
+                - containerPort: 6379  # Ray GCS
+                  name: gcs
+                - containerPort: 8265  # Dashboard
+                  name: dashboard
+                - containerPort: 10001 # Ray client
+                  name: client
+                - containerPort: 8000  # Serve API
+                  name: serve
+              volumeMounts:
+                - name: dshm
+                  mountPath: /dev/shm
+          volumes:
+            - name: dshm
+              emptyDir:
+                medium: Memory
+                sizeLimit: 2Gi
+
+    # Worker nodes (optional for scaling)
+    workerGroupSpecs:
+      - groupName: gpu-workers
+        replicas: 0  # Start with 0, scale up as needed
+        minReplicas: 0
+        maxReplicas: 3
+        rayStartParams:
+          num-cpus: "4"
+          memory: "5368709120"
+          object-store-memory: "1073741824"
+        template:
+          metadata:
+            labels:
+              app: cyber-rag
+              component: worker
+          spec:
+            containers:
+              - name: ray-worker
+                image: rayproject/ray:2.31.0-py310-gpu
+                imagePullPolicy: IfNotPresent
+                resources:
+                  requests:
+                    cpu: "2"
+                    memory: "4Gi"
+                  limits:
+                    cpu: "4"
+                    memory: "8Gi"
+                    nvidia.com/gpu: 1
+                volumeMounts:
+                  - name: dshm
+                    mountPath: /dev/shm
+            volumes:
+              - name: dshm
+                emptyDir:
+                  medium: Memory
+                  sizeLimit: 2Gi

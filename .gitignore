@@ -1,0 +1,83 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+venv/
+env/
+ENV/
+.venv
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# Data directories (large files)
+data/raw/
+data/processed/
+data/embeddings/
+*.jsonl
+*.json.gz
+*.parquet
+
+# Model files (large files)
+models/base/
+models/adapters/
+models/checkpoints/
+*.bin
+*.safetensors
+*.gguf
+*.pt
+*.pth
+
+# Logs and outputs
+logs/
+*.log
+wandb/
+outputs/
+
+# Ray
+ray_results/
+/tmp/ray/
+
+# Test artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+
+# Environment variables
+.env
+.env.local
+
+# OS
+Thumbs.db
