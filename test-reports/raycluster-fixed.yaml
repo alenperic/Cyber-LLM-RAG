@@ -1,0 +1,71 @@
+apiVersion: ray.io/v1
+kind: RayCluster
+metadata:
+  name: raycluster-basic
+  namespace: default
+spec:
+  rayVersion: "2.31.0"
+  headGroupSpec:
+    rayStartParams:
+      dashboard-host: "0.0.0.0"
+      num-cpus: "2"
+      memory: "2684354560"  # 2.5GB for Ray heap
+      object-store-memory: "536870912"  # 512MB for object store
+    template:
+      metadata:
+        labels:
+          ray-node-type: head
+      spec:
+        containers:
+          - name: ray-head
+            image: "rayproject/ray:2.31.0-py310"
+            imagePullPolicy: IfNotPresent
+            resources:
+              requests:
+                cpu: "1"
+                memory: "2Gi"
+              limits:
+                cpu: "2"
+                memory: "4Gi"
+            ports:
+              - containerPort: 8265  # dashboard
+              - containerPort: 10001 # gcs server
+            volumeMounts:
+              - name: dshm
+                mountPath: /dev/shm
+        volumes:
+          - name: dshm
+            emptyDir:
+              medium: Memory
+  workerGroupSpecs:
+    - groupName: workers
+      replicas: 2
+      minReplicas: 1
+      maxReplicas: 5
+      rayStartParams:
+        num-cpus: "2"
+        memory: "2684354560"  # 2.5GB for Ray heap
+        object-store-memory: "536870912"  # 512MB for object store
+      template:
+        metadata:
+          labels:
+            ray-node-type: worker
+        spec:
+          containers:
+            - name: ray-worker
+              image: "rayproject/ray:2.31.0-py310"
+              imagePullPolicy: IfNotPresent
+              resources:
+                requests:
+                  cpu: "1"
+                  memory: "2Gi"
+                limits:
+                  cpu: "2"
+                  memory: "4Gi"
+              volumeMounts:
+                - name: dshm
+                  mountPath: /dev/shm
+          volumes:
+            - name: dshm
+              emptyDir:
+                medium: Memory
