@@ -2,11 +2,7 @@
 
 A cybersecurity AI system combining **Retrieval-Augmented Generation (RAG)** with **domain-adapted LLMs**. This project provides instant utility for CTI (Cyber Threat Intelligence) and IR (Incident Response) workflows while establishing evaluation baselines for cybersecurity AI.
 
-**✅ Fully Tested:** All components validated with 100% test pass rate across **3 comprehensive test runs** (zero failures).
-**✅ Production Ready:** Deployed on Kubernetes with Ray Serve, achieving **10,576 docs/sec** processing speed (83x optimized).
-**✅ Well Documented:** 2,900+ lines of comprehensive documentation including deployment guides and test reports.
-
-## 🎯 Features
+## Features
 
 ### 1. **RAG MVP** - Instant Cybersecurity Knowledge Base
 - **Indexed Knowledge Sources:**
