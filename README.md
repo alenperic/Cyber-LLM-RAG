@@ -1,10 +1,5 @@
 # CyberLLM RAG: Cybersecurity AI Assistant
 
-[![Tests](https://img.shields.io/badge/tests-3%2F3%20passing-brightgreen)](./test-reports/)
-[![Code Quality](https://img.shields.io/badge/code%20quality-100%25-brightgreen)](./test-reports/)
-[![Production Ready](https://img.shields.io/badge/production-ready-success)](./QUICKSTART.md)
-[![Performance](https://img.shields.io/badge/performance-10.5K%20docs%2Fsec-blue)](./test-reports/TEST_RUN_3_REPORT.md)
-
 A cybersecurity AI system combining **Retrieval-Augmented Generation (RAG)** with **domain-adapted LLMs**. This project provides instant utility for CTI (Cyber Threat Intelligence) and IR (Incident Response) workflows while establishing evaluation baselines for cybersecurity AI.
 
 **✅ Fully Tested:** All components validated with 100% test pass rate across **3 comprehensive test runs** (zero failures).
